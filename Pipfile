@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+python-mimeparse = "*"
+django-tastypie = "*"
 
 [dev-packages]
 autopep8 = "*"
