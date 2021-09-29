@@ -22,4 +22,14 @@ def say_hello(request):
 
     # product = Product.objects.filter(pk=0).first()
 
-    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh'})
+    # Filtering products/ search queryset api to find all type of lookup sets
+    query_set = Product.objects.filter(unit_price__gt=200)
+    # query_set = Product.objects.filter(unit_price__range=(300, 600))
+    # query_set = Product.objects.filter(collection__id__range=(1, 2))
+    # query_set = Product.objects.filter(title__contains='Cat')
+    # query_set = Product.objects.filter(title__icontains='Cat')
+    # query_set = Product.objects.filter(last_updated__year=2021)
+    # query_set = Product.objects.filter(last_updated__date='2021-09-02')
+    # query_set = Product.objects.filter(description__isnull=True)
+
+    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
