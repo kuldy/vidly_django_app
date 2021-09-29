@@ -13,4 +13,11 @@ def say_hello(request):
     # list(query_set)
     # query_set[0]
 
+    # try:
+    #     product = Product.objects.get(pk=0)
+    # except ObjectDoesNotExist:
+    #     pass
+
+    # product = Product.objects.filter(pk=0).first()
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh'})
