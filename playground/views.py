@@ -7,12 +7,14 @@ from store.models import Product
 
 
 def say_hello(request):
+    # manager object and query_set
     # query_set = Product.objects.all()
     # for product in query_set:
     #     print(product)
     # list(query_set)
     # query_set[0]
 
+    # Retriving objects
     # try:
     #     product = Product.objects.get(pk=0)
     # except ObjectDoesNotExist:
