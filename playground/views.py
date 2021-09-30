@@ -53,4 +53,7 @@ def say_hello(request):
     # product = Product.objects.earliest('unit_price')  # returns product obj asc
     # product = Product.objects.latest('unit_price')  # returns product obj desc
 
+    # query_set = Product.objects.all()[:2]
+    # query_set = Product.objects.all()[2:4]
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set), 'rohit': product})
