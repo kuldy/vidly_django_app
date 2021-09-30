@@ -44,4 +44,13 @@ def say_hello(request):
     # query_set = Product.objects.filter(inventory=F('unit_price'))
     # query_set = Product.objects.filter(inventory=F('collection__id'))
 
-    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
+    # query_set = Product.objects.order_by('title')
+    # query_set = Product.objects.order_by('-title')
+    # query_set = Product.objects.order_by('unit_price', '-title')
+    # query_set = Product.objects.order_by('unit_price', '-title').reverse()
+    # query_set = Product.objects.filter(collection__id=1).order_by('unit_price')
+    product = Product.objects.order_by('unit_price')[0]  # returns product obj
+    # product = Product.objects.earliest('unit_price')  # returns product obj asc
+    # product = Product.objects.latest('unit_price')  # returns product obj desc
+
+    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set), 'rohit': product})
