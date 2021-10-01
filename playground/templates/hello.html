@@ -18,6 +18,12 @@
       {% endfor %}
     </ul>
 
+    <ul>
+      {% for order in orders%}
+      <li>{{order.id}}-{{order.customer.first_name}}</li>
+      {% endfor %}
+    </ul>
+
     <p>this is {{rohit.title}}</p>
   </body>
 </html>
