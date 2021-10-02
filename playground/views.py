@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, F
-from store.models import Order, OrderItem, Product
+from django.db.models import Value
+from django.db.models.aggregates import Count, Max, Min, Avg, Sum
+from store.models import Customer, Order, OrderItem, Product
 
 # Create your views here.
 
@@ -49,7 +51,7 @@ def say_hello(request):
     # query_set = Product.objects.order_by('unit_price', '-title')
     # query_set = Product.objects.order_by('unit_price', '-title').reverse()
     # query_set = Product.objects.filter(collection__id=1).order_by('unit_price')
-    product = Product.objects.order_by('unit_price')[0]  # returns product obj
+    # product = Product.objects.order_by('unit_price')[0]  # returns product obj
     # product = Product.objects.earliest('unit_price')  # returns product obj asc
     # product = Product.objects.latest('unit_price')  # returns product obj desc
 
@@ -72,7 +74,12 @@ def say_hello(request):
     # query_set = Product.objects.prefetch_related('promotions').all()
     # query_set = Product.objects.prefetch_related(
     #     'promotions').select_related('collection').all()
-    orders = Order.objects.select_related(
-        'customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
+    # orders = Order.objects.select_related(
+    #     'customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
 
-    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set), 'rohit': product, 'orders': list(orders)})
+    # result = Product.objects.aggregate(count=Count(
+    #     'id'), description_count=Count('description'))
+    # result = Product.objects.aggregate(count=Count(
+    #     'id'), min_price=Min('unit_price'))
+
+    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set), 'result': list(result)})
