@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q, F
-from django.db.models import Value
+from django.db.models import Q, F, Value, Func
+from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
 from store.models import Customer, Order, OrderItem, Product
 
@@ -65,9 +65,11 @@ def say_hello(request):
     # query_set = Product.objects.filter(
     #     id__in=OrderItem.objects.values('product_id').distinct()).order_by('title')
 
+    # defering fields
     # query_set = Product.objects.only('id', 'title')
     # query_set = Product.objects.defer('description')
 
+    # selecting related objects
     # select_related(1)
     # prefetch_related(n)
     # query_set = Product.objects.select_related('collection').all()
@@ -77,9 +79,15 @@ def say_hello(request):
     # orders = Order.objects.select_related(
     #     'customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
 
+    # aggrigating objects
+    result = "result"
     # result = Product.objects.aggregate(count=Count(
     #     'id'), description_count=Count('description'))
     # result = Product.objects.aggregate(count=Count(
     #     'id'), min_price=Min('unit_price'))
+    # anotating objects
+    # customers = Customer.objects.annotate(is_new=Value(True))
+    # customers = Customer.objects.annotate(new_id=F('id'))
+    # customers = Customer.objects.annotate(new_id=F('id') + 1)
 
-    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set), 'result': list(result)})
+    return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
