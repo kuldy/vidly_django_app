@@ -90,4 +90,10 @@ def say_hello(request):
     # customers = Customer.objects.annotate(new_id=F('id'))
     # customers = Customer.objects.annotate(new_id=F('id') + 1)
 
+    # calling database functions(search django database functions for more)
+    # query_set = Customer.objects.annotate(full_name=Func(
+    #     F('first_name'), Value(' '), F('last_name'), function=('CONCAT')))
+    # query_set = Customer.objects.annotate(
+    #     full_name=Concat('first_name', Value(' '), 'last_name'))
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
