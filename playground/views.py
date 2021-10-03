@@ -114,4 +114,7 @@ def say_hello(request):
         .select_related('tag') \
         .filter(content_type=content_type, object_id=1)
 
+    # custom managers
+    query_set = TaggedItem.objects.get_tags_for(Product, 1)
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
