@@ -7,7 +7,7 @@ from django.db.models import Q, F, Value, Func
 from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
 from django.contrib.contenttypes.models import ContentType
-from store.models import Customer, Order, OrderItem, Product
+from store.models import Collection, Customer, Order, OrderItem, Product
 from tags.models import TaggedItem
 
 # Create your views here.
@@ -118,14 +118,14 @@ def say_hello(request):
     # query_set = TaggedItem.objects.get_tags_for(Product, 1)
 
     # caching happens only if we evaluate entire queryset first
-    query_set = Product.objects.all()
-    list(query_set)
-    list(query_set)
-    query_set[0]
+    # query_set = Product.objects.all()
+    # list(query_set)
+    # list(query_set)
+    # query_set[0]
 
     # no caching
-    query_set = Product.objects.all()
-    query_set[0]
-    list(query_set)
+    # query_set = Product.objects.all()
+    # query_set[0]
+    # list(query_set)
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
