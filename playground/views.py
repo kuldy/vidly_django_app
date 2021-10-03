@@ -96,4 +96,7 @@ def say_hello(request):
     # query_set = Customer.objects.annotate(
     #     full_name=Concat('first_name', Value(' '), 'last_name'))
 
+    # grouping data
+    query_set = Customer.objects.annotate(order_count=Count('order'))
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
