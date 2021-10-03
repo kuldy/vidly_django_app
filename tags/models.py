@@ -18,6 +18,7 @@ class Tag(models.Model):
 
 
 class TaggedItem(models.Model):
+    # this way we are adding custome methods(get_tags_for) to manager object
     objects = TaggedItemManager()
     # what tag applied to whaat item
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
