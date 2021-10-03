@@ -128,4 +128,20 @@ def say_hello(request):
     # query_set[0]
     # list(query_set)
 
+    # creating objects
+    # 1st way
+    # collection = Collection()
+    # collection.title = 'Video Games'
+    # collection.feactured_product = Product(pk=1)
+    # collection.save()
+    # 2nd way
+    # collection = Collection()
+    # collection.title = 'Video Games'
+    # collection.feactured_product_id = 1
+    # 3rd way
+    # collection = Collection(title="Video Games", feactured_product_id = 1)
+    # 4th way
+    # collection = Collection.objects.create(
+    #     title="towels", feactured_product_id=2)
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
