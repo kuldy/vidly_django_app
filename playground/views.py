@@ -109,12 +109,23 @@ def say_hello(request):
     # query_set = Product.objects.annotate(discounted_price=discounted_price)
 
     # quering generic relationships
-    content_type = ContentType.objects.get_for_model(Product)
-    query_set = TaggedItem.objects \
-        .select_related('tag') \
-        .filter(content_type=content_type, object_id=1)
+    # content_type = ContentType.objects.get_for_model(Product)
+    # query_set = TaggedItem.objects \
+    #     .select_related('tag') \
+    #     .filter(content_type=content_type, object_id=1)
 
     # custom managers
-    query_set = TaggedItem.objects.get_tags_for(Product, 1)
+    # query_set = TaggedItem.objects.get_tags_for(Product, 1)
+
+    # caching happens only if we evaluate entire queryset first
+    query_set = Product.objects.all()
+    list(query_set)
+    list(query_set)
+    query_set[0]
+
+    # no caching
+    query_set = Product.objects.all()
+    query_set[0]
+    list(query_set)
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
