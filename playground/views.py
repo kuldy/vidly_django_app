@@ -1,3 +1,5 @@
+from django.db.models.expressions import ExpressionWrapper
+from django.db.models.fields import DecimalField
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -97,6 +99,11 @@ def say_hello(request):
     #     full_name=Concat('first_name', Value(' '), 'last_name'))
 
     # grouping data
-    query_set = Customer.objects.annotate(order_count=Count('order'))
+    # query_set = Customer.objects.annotate(order_count=Count('order'))
+
+    # working with expression wrappers
+    discounted_price = ExpressionWrapper(
+        F('unit_price')*.8, output_field=DecimalField())
+    query_set = Product.objects.annotate(discounted_price=discounted_price)
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
