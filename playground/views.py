@@ -6,7 +6,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, F, Value, Func
 from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
+from django.contrib.contenttypes.models import ContentType
 from store.models import Customer, Order, OrderItem, Product
+from tags.models import TaggedItem
 
 # Create your views here.
 
@@ -102,8 +104,14 @@ def say_hello(request):
     # query_set = Customer.objects.annotate(order_count=Count('order'))
 
     # working with expression wrappers
-    discounted_price = ExpressionWrapper(
-        F('unit_price')*.8, output_field=DecimalField())
-    query_set = Product.objects.annotate(discounted_price=discounted_price)
+    # discounted_price = ExpressionWrapper(
+    #     F('unit_price')*.8, output_field=DecimalField())
+    # query_set = Product.objects.annotate(discounted_price=discounted_price)
+
+    # quering generic relationships
+    content_type = ContentType.objects.get_for_model(Product)
+    query_set = TaggedItem.objects \
+        .select_related('tag') \
+        .filter(content_type=content_type, object_id=1)
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
