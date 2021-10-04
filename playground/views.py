@@ -13,6 +13,8 @@ from tags.models import TaggedItem
 
 # Create your views here.
 
+# @transaction.atomic()
+
 
 def say_hello(request):
     query_set = 'abc'
@@ -161,5 +163,19 @@ def say_hello(request):
     # collection.delete()
     # multiple objects
     # collection = Collection.objects.filter(id__gt=7).delete()
+
+    # transaction
+    # as contaxt manager
+    # with transaction.atomic():
+    #     order = Order()
+    #     order.customer_id = 1
+    #     order.save()
+
+    #     orderitem = OrderItem()
+    #     orderitem.order = order
+    #     orderitem.product_id = 1
+    #     orderitem.quantity = 1
+    #     orderitem.unit_price = 10
+    #     orderitem.save()
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
