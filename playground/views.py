@@ -151,7 +151,14 @@ def say_hello(request):
     # collection.feactured_product = None
     # collection.save()
     # 2nd way
-    collection = Collection.objects.filter(pk=8).update(
-        title="Books", feactured_product=Product(pk=3))
+    # collection = Collection.objects.filter(pk=8).update(
+    #     title="Books", feactured_product=Product(pk=3))
+
+    # deleting Objects
+    # single object
+    # collection = Collection(pk=8)
+    # collection.delete()
+    # multiple objects
+    collection = Collection.objects.filter(id__gt=7).delete()
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
