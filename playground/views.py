@@ -144,4 +144,14 @@ def say_hello(request):
     # collection = Collection.objects.create(
     #     title="towels", feactured_product_id=2)
 
+    # updating objects
+    # 1st way read and then update to prevent data lose
+    # collection = Collection.objects.get(pk=8)
+    # collection.title = 'magzines'
+    # collection.feactured_product = None
+    # collection.save()
+    # 2nd way
+    collection = Collection.objects.filter(pk=8).update(
+        title="Books", feactured_product=Product(pk=3))
+
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
