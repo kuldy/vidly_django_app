@@ -8,6 +8,7 @@ from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction
+from django.db import connection
 from store.models import Collection, Customer, Order, OrderItem, Product
 from tags.models import TaggedItem
 
@@ -177,5 +178,14 @@ def say_hello(request):
     #     orderitem.quantity = 1
     #     orderitem.unit_price = 10
     #     orderitem.save()
+
+    # executing raw queries
+    # query_set = Product.objects.raw('SELECT * FROM store_product')
+    # bypassing the model layer
+    # with connection.cursor() as cursor:
+    #     cursor.execute('SELECT * FROM store_product')
+    # stored procedure
+    # with connection.cursor() as cursor:
+    #     cursor.callproc('get_customers', [1,2,3,'a'])
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
