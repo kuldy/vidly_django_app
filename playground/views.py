@@ -7,6 +7,7 @@ from django.db.models import Q, F, Value, Func
 from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
 from django.contrib.contenttypes.models import ContentType
+from django.db import transaction
 from store.models import Collection, Customer, Order, OrderItem, Product
 from tags.models import TaggedItem
 
@@ -159,6 +160,6 @@ def say_hello(request):
     # collection = Collection(pk=8)
     # collection.delete()
     # multiple objects
-    collection = Collection.objects.filter(id__gt=7).delete()
+    # collection = Collection.objects.filter(id__gt=7).delete()
 
     return render(request, 'hello.html', {'kullu': 'Kuldeep Singh', 'products': list(query_set)})
