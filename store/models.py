@@ -14,6 +14,12 @@ class Collection(models.Model):
     feactured_product = models.ForeignKey(
         'Product', on_delete=models.SET_NULL, null=True, related_name='+')
 
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        ordering = ['title']
+
 
 class Product(models.Model):
     # sku = models.CharField(max_length=10, primary_key=True)
@@ -26,6 +32,12 @@ class Product(models.Model):
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     # promotions = models.ManyToManyField(Promotions, related_name='products')
     promotions = models.ManyToManyField(Promotions)  # default
+
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        ordering = ['title']
 
 
 class Customer(models.Model):
