@@ -19,6 +19,8 @@ from django.urls import path, include
 from api.models import MovieResource
 from . import views
 
+admin.site.site_header = 'Vidly Admin'
+admin.site.index_title = 'Admin'
 movie_resource = MovieResource()
 
 urlpatterns = [
