@@ -60,6 +60,9 @@ class Customer(models.Model):
 
     # order_set
 
+    def __str__(self) -> str:
+        return self.first_name
+
     # class Meta:
     #     db_table: 'store_customers'
     #     indexes = [
