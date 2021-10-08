@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db.models.aggregates import Count
+from django.db.models.expressions import Value
 from . import models
 
 # search django modelAdmin-> model admin options
@@ -22,7 +24,17 @@ class ProductAdmin(admin.ModelAdmin):
         return 'OK'
 
 
-admin.site.register(models.Collection)
+# admin.site.register(models.Collection)
+@admin.register(models.Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'product_count']
+
+    @admin.display(ordering='product_count')
+    def product_count(self, collection):
+        return collection.product_count
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(product_count=Count('product'))
 
 
 @admin.register(models.Customer)
