@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html, urlencode
+from django.urls import reverse
 from django.db.models.aggregates import Count
 from django.db.models.expressions import Value
 from . import models
@@ -31,7 +33,13 @@ class CollectionAdmin(admin.ModelAdmin):
 
     @admin.display(ordering='product_count')
     def product_count(self, collection):
-        return collection.product_count
+        url = (
+            reverse('admin:store_product_changelist')
+            + '?'
+            + urlencode({
+                'collection__id': str(collection.id)
+            }))
+        return format_html('<a href="{}" >{}</a>', url, collection.product_count)
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(product_count=Count('product'))
@@ -39,10 +47,22 @@ class CollectionAdmin(admin.ModelAdmin):
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'membership']
+    list_display = ['id', 'first_name', 'last_name', 'membership', 'orders']
     list_editable = ['membership']
     ordering = ['first_name', 'last_name']
     list_per_page = 5
+
+    def orders(self, customer):
+        url = (
+            reverse('admin:store_order_changelist')
+            + '?'
+            + urlencode({
+                'customer__id': str(customer.id)
+            }))
+        return format_html('<a href="{}">{}</a>', url, customer.orders)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(orders=Count('order'))
 
 
 @admin.register(models.Order)
