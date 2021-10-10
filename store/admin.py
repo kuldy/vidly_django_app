@@ -79,6 +79,11 @@ class CollectionAdmin(admin.ModelAdmin):
         return super().get_queryset(request).annotate(product_count=Count('product'))
 
 
+@admin.register(models.Promotions)
+class PromotionAdmin(admin.ModelAdmin):
+    list_display = ['descriptions']
+
+
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     search_fields = ['first_name']
