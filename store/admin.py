@@ -105,10 +105,21 @@ class CustomerAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(orders=Count('order'))
 
+# StackedInline and TabularInline
+
+
+class OrderItemInline(admin.TabularInline):
+    # autocomplete_fields = ['product']  # throwing error
+    model = models.OrderItem
+    extra = 0  # 1 form
+    # min_num = 5
+    # max_num = 10
+
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     autocomplete_fields = ['customer']
+    inlines = [OrderItemInline]
     list_display = ['id', 'placed_at', 'customer_first_name']
     list_select_related = ['customer']
 
