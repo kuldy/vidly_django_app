@@ -29,5 +29,6 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('api/', include(movie_resource.urls)),
     path('playground/', include('playground.urls')),
+    path('store/', include('store.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
