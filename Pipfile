@@ -9,6 +9,7 @@ python-mimeparse = "*"
 django-tastypie = "*"
 mysqlclient = "*"
 django-debug-toolbar = "*"
+djangorestframework = "*"
 
 [dev-packages]
 autopep8 = "*"
