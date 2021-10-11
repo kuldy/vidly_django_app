@@ -1,12 +1,9 @@
 from django.contrib import admin, messages
-from django.contrib.contenttypes.admin import GenericStackedInline
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from django.db.models.aggregates import Count
 from django.db.models.expressions import Value
-
-from tags.models import TaggedItem
 from . import models
 
 # search django modelAdmin-> model admin options
@@ -26,14 +23,8 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
-class TagInline(GenericStackedInline):
-    autocomplete_fields = ['tag']
-    model = TaggedItem
-
-
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [TagInline]
     search_fields = ['title']
     # fields = ['title', 'slug']
     # exclude = ['promotions', 'collection']
