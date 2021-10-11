@@ -27,16 +27,17 @@ class InventoryFilter(admin.SimpleListFilter):
 
 
 class TagInline(GenericStackedInline):
+    autocomplete_fields = ['tag']
     model = TaggedItem
 
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [TagInline]
+    search_fields = ['title']
     # fields = ['title', 'slug']
     # exclude = ['promotions', 'collection']
     # readonly_fields = ['title']
-    search_fields = ['title']
     autocomplete_fields = ['collection']
     prepopulated_fields = {
         'slug': ['title']
