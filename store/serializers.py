@@ -14,7 +14,8 @@ class ProductSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
         # fields = '__all__' # bad practice
-        fields = ['id', 'title', 'unit_price', 'price_with_tax', 'collection']
+        fields = ['id', 'title', 'description', 'slug', 'inventory',
+                  'unit_price', 'price_with_tax', 'collection']
     # price = serializers.DecimalField(
     #     max_digits=6, decimal_places=2, source="unit_price")
     price_with_tax = serializers.SerializerMethodField(
@@ -36,3 +37,14 @@ class ProductSerializers(serializers.ModelSerializer):
     #     if data['password'] != data['confirm_password']:
     #         return serializers.ValidationError('Password did not matched!')
     #     return data
+
+    # def create(self, validate_data):
+    #     product = Product(**validate_data)
+    #     product.other = 1
+    #     product.save()
+    #     return product
+
+    # def update(self, instance, validated_data):
+    #     instance.unit_price = validated_data.get('unit_price')
+    #     instance.save()
+    #     return instance

@@ -19,11 +19,11 @@ def product_list(request):
     elif request.method == 'POST':
         serializer = ProductSerializers(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print(serializer.validated_data)
-        return Response('ok')
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view()
+@api_view(['GET', 'PUT'])
 def product_details(request, id):
     # try:
     #     product = Product.objects.get(pk=id)
@@ -32,8 +32,14 @@ def product_details(request, id):
     # except Product.DoesNotExist:
     #     return Response(status=status.HTTP_404_NOT_FOUND)
     product = get_object_or_404(Product, pk=id)
-    serializer = ProductSerializers(product)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = ProductSerializers(product)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = ProductSerializers(product, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 
 @api_view()
