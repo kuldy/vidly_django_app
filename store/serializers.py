@@ -4,10 +4,19 @@ from rest_framework import serializers
 from store.models import Product, Collection
 
 
-class CollectionSerializer(serializers.Serializer):
+class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
-        fields = ['id', 'title']
+        fields = ['id', 'title', 'products_count']
+
+    products_count = serializers.IntegerField(read_only=True)
+
+    # product_count = serializers.SerializerMethodField(
+    #     method_name='count_product'
+    # )
+
+    # def count_product(self, collection: Collection):
+    #     return collection.objects.prefetch_related('product').count()
 
 
 class ProductSerializers(serializers.ModelSerializer):
