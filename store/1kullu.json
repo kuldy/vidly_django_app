@@ -1,0 +1,15 @@
+[
+  "product",
+  {
+    "title": "a",
+    "slug": "a",
+    "unit_price": 1,
+    "collection": 1,
+    "inventory": 1
+  },
+  "collection",
+  {
+    "title": "toy",
+    "products_count": 0
+  }
+]
