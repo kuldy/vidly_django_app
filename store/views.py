@@ -15,6 +15,8 @@ from store import serializers
 class ProductList(APIView):
     def get(self, request):
         queryset = Product.objects.select_related('collection').all()
+        # serializer = ProductSerializers(
+        #     queryset, many=True, context={'request': request})
         serializer = ProductSerializers(
             queryset, many=True)
         return Response(serializer.data)
