@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'movies',
+    'film',
     'api',
     'playground',
     'store',
@@ -97,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'storefront',
         'HOST': 'localhost',
-        'USER': 'root',
+        'USER': 'chintu',
         'PASSWORD': 'root',
     }
 }

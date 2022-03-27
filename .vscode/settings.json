@@ -1,0 +1,10 @@
+{
+  "python.linting.pylintEnabled": false,
+  "python.linting.enabled": true,
+  "python.linting.pycodestyleEnabled": true,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pylintArgs": [
+    "[\"--errors-only\"]",
+    "[\"--disable=C0111\"]"
+  ]
+}

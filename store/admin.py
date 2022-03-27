@@ -74,10 +74,12 @@ class CollectionAdmin(admin.ModelAdmin):
             + urlencode({
                 'collection__id': str(collection.id)
             }))
-        return format_html('<a href="{}" >{}</a>', url, collection.product_count)
+        return format_html('<a href="{}" >{}</a>', url,
+                           collection.product_count)
 
     def get_queryset(self, request):
-        return super().get_queryset(request).annotate(product_count=Count('products'))
+        return super().get_queryset(request).annotate(
+            product_count=Count('products'))
 
 
 @admin.register(models.Promotions)
